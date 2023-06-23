@@ -6,11 +6,12 @@
 ![img](images/man-3774381.jpg)
 
 ## Summary
-Recommendation systems use machine learning to solve the long-tail problem with digital content. There is a lot of content out on the internet so it would take a person a long time to sort through it to find something they like. Recommendation systems help wth that buy suggesting content to people. [Netflix estimates](https://towardsdatascience.com/deep-dive-into-netflixs-recommender-system-341806ae3b48) it gets around 80% of total watch time thanks to its recommendation system.
+Recommendation systems use machine learning to solve the long-tail problem with digital content. There is a lot of content out on the internet so it would take a person a long time to sort through it to find something they like. Recommendation systems help with that by suggesting content to people. [Netflix estimates](https://towardsdatascience.com/deep-dive-into-netflixs-recommender-system-341806ae3b48) it gets around 80% of total watch time thanks to its recommendation system.
 
-We are using the famous [MovieLense dataset](https://grouplens.org/datasets/movielens/latest/) (small) consisting of 100,000 ratings and 3,600 tag applications applied to 9,000 movies by 600 users. The data is fairly clean already so most of the preperation involved manipulating the datasets into formats that can be used by recommendation systems, some recommendation systems use the format provided but `ALS by hand` and `cosign similarity` required some modifications.
+We are using the famous [MovieLense dataset](https://grouplens.org/datasets/movielens/latest/) (small) consisting of 100,000 ratings and 3,600 tag applications applied to 9,000 movies by 600 users. The data is fairly clean so most of the preperation involved manipulating the datasets into formats that can be used by recommendation systems. Some recommendation systems use the format provided, but `ALS by hand` and `cosign similarity` required some modifications.
 
-Our long tail
+Our data has a long tail with many movies with <50 ratings.
+
 ![img](images/long-tail.png)
 
 Our modeling approach was:
@@ -26,10 +27,10 @@ We evaluated these models using RMSE as the measurement. Netflix's famous compet
 Our best performing model was SVD optimized using gridsearch using surprise. Our recommendation however is to use ALS via spark to start however because of the efficiency of ALS and Spark in handling large datasets. 
 
 ## Business Problem
-Our imaginary client, ACME corp. is launching ACME+, which is a digital asset hosting service focusing on movies. As part of their launch they want to start recommending movies to their users. Their R&D department is unfamiliar with recommendation systems so they've hired us to come up with some example recommendation systems and present to their engineering leads so they can focus their efforts.
+Our imaginary client, ACME corp. is launching ACME+, a digital asset hosting service focusing on movies. As part of their launch they want to start recommending movies to their users. Their R&D department is unfamiliar with recommendation systems so they've hired us to come up with some example recommendation systems and present to their engineering leads so they can focus their efforts.
 
 ## Data
-We are using the famous [MovieLense dataset](https://grouplens.org/datasets/movielens/latest/) (small) consisting of 100,000 ratings and 3,600 tag applications applied to 9,000 movies by 600 users. The data is fairly clean already so most of the preperation involved manipulating the datasets into formats that can be used by recommendation systems, some recommendation systems use the format provided but `ALS by hand` and `cosign similarity` required some modifications.
+We are using the famous [MovieLense dataset](https://grouplens.org/datasets/movielens/latest/) (small) consisting of 100,000 ratings and 3,600 tag applications applied to 9,000 movies by 600 users. The data is fairly clean so most of the preperation involved manipulating the datasets into formats that can be used by recommendation systems. Some recommendation systems use the format provided, but `ALS by hand` and `cosign similarity` required some modifications.
 
 ## Methods
 Our modeling approach was:
@@ -54,16 +55,16 @@ Model RMSE Results:
 - KNNBaseline: 0.874
 - SVD: 0.875
 - CoClustering: 0.941
-- SVD Optimized: 0.856
+- **SVD Optimized: 0.856** (winner)
   
 ## Conclusions
 Business recommendations:
-- ALS for efficiency
+- ALS for efficiency and ease of implementation
 - Hybrid approach to handle cold start
 - Spark for scale (big data)
 
 ## Next steps
-- Introduce Ensemble methods to further imporve RMSE
+- Introduce Ensemble methods to further improve RMSE
 - Adopt a hybrid approach (collaborative + content-based) to address cold start
 - Dive deeper into spark, scale with large dataset
 
@@ -81,5 +82,5 @@ For any additional questions, please contact William Bennett at <jam637.jlm@gmai
 ├── .gitignore
 ├── README.md
 ├── index.ipynb (main notebook)
-└── spark.ipyne (spark implementation
+└── spark.ipynb (spark implementation)
 ```
